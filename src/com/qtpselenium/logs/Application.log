@@ -1,0 +1,15 @@
+19/03/2013 08:53:59 devpinoyLogger Hello
+19/03/2013 08:53:59 devpinoyLogger Config loaded, stating test
+19/03/2013 08:53:59 devpinoyLogger Check Items------N
+19/03/2013 08:53:59 devpinoyLogger Search Suite------N
+19/03/2013 08:53:59 devpinoyLogger C Suite------Y
+19/03/2013 08:53:59 devpinoyLogger *****Excuting Suite ***-----------C Suite
+19/03/2013 08:53:59 devpinoyLogger SampleTest--------Y
+19/03/2013 08:53:59 devpinoyLogger Excuting The Test Case SampleTest
+19/03/2013 08:53:59 devpinoyLogger Iteration number----1
+19/03/2013 08:53:59 devpinoyLogger openBrowser----- Excuting keywordopenBrowser
+19/03/2013 08:53:59 devpinoyLogger Method is public java.lang.String com.qtpselenium.test.Keywords.openBrowser(java.lang.String,java.lang.String)
+19/03/2013 08:53:59 devpinoyLogger Current Keyword is openBrowser
+19/03/2013 08:53:59 devpinoyLogger Opening browser
+19/03/2013 08:53:59 devpinoyLogger 
+19/03/2013 08:53:59 devpinoyLogger 
