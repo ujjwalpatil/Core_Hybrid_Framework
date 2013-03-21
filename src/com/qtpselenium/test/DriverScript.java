@@ -23,18 +23,18 @@ public class DriverScript {
 		public String CurrentTestSuite; 
 		
 		//Single Test Suite
-		public Xls_Reader CurrentTestSuiteXls;
-		public int CurrentTestCaseID;	
-		public String CurrnetTestCaseName;
-		public int CurrentTestStepID;
-		public String CurrentKeyword;
-		public int CurrentTestDataSetID;
-		public Method method[];
-		public Keywords Keywords;
-		public String Keyword_Execution_Result;
-		public ArrayList<String> ResultSet;
-		public String data;
-		public String object;
+		public static Xls_Reader CurrentTestSuiteXls;
+		public static int CurrentTestCaseID;	
+		public static String CurrnetTestCaseName;
+		public static int CurrentTestStepID;
+		public static String CurrentKeyword;
+		public static int CurrentTestDataSetID;
+		public static Method method[];
+		public static Keywords Keywords;
+		public static String Keyword_Execution_Result;
+		public static ArrayList<String> ResultSet;
+		public static String data;
+		public static String object;
 		public static Method capturescreenShot_method;
 		
 		
@@ -46,6 +46,7 @@ public class DriverScript {
 		{
 			
 			Keywords =new Keywords();
+			
 			method = Keywords.getClass().getMethods();
 			//capturescreenShot_method =Keywords.getClass().getMethod("captureScreenshot",String.class,String.class);
 			
@@ -165,7 +166,7 @@ public void ExecuteKeyWords() throws IllegalAccessException, IllegalArgumentExce
 	       		 APP_LOGS.debug("Method is " + method[i]);
 	       		 APP_LOGS.debug("Current Keyword is "+ CurrentKeyword);
 	       		
-	       	/*	String dataCol = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.Data, CurrentTestStepID);	
+	       		String dataCol = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.Data, CurrentTestStepID);	
 				// config, OR, XLS
 	       		if(dataCol.startsWith(Constants.CONFIG))
 	       		{
@@ -184,7 +185,7 @@ public void ExecuteKeyWords() throws IllegalAccessException, IllegalArgumentExce
 	       		else
 	       		{
 					data=OR.getProperty(dataCol);
-				}*/
+				}
 				
 				// OBJECT
 				object=CurrentTestSuiteXls.getCellData(CurrnetTestCaseName, Constants.OBJECT, CurrentTestStepID);

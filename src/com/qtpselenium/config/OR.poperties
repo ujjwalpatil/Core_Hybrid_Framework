@@ -1,3 +1,13 @@
 ## Objects
-Login_Button=
-Forgot_Passwd_link= 
+Login_link=
+Forgot_passwd_link=//*[@id="id_loginForm:j_idt32"]/label
+sign_in_button=//*[@id="id_loginForm:loginButton"]
+sign_in_button_text=Sign In
+UserName_TextBox=//*[@id="id_loginForm:id_loginName"]
+Password_TextBox=//*[@id="id_loginForm:id_loginPanel"]/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/input
+homepage_8x_banner=//*[@id="dnn_ctr3002_HtmlModule_lblContent"]/img
+error_login=//*[@id="id_loginForm:j_idt12_body"]/table[3]/tbody/tr/td[2]/span
+error_login_wrong_user_pass=Incorrect username/password
+error_login_enterpassword=Please Enter Password
+error_login_enterusername=Please Enter Username
+image_processing=//*[@id='statPane_content']

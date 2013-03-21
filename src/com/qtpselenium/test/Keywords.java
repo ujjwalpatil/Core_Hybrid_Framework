@@ -1,6 +1,11 @@
 package com.qtpselenium.test;
 
 import static com.qtpselenium.test.DriverScript.APP_LOGS;
+import static com.qtpselenium.test.DriverScript.CurrentTestCaseID;
+import static com.qtpselenium.test.DriverScript.CurrentTestSuiteXls;
+import static com.qtpselenium.test.DriverScript.CurrentTestCaseID;
+import static com.qtpselenium.test.DriverScript.CurrnetTestCaseName;
+import static com.qtpselenium.test.DriverScript.CurrentTestDataSetID;
 import static com.qtpselenium.test.DriverScript.CONFIG;
 import static com.qtpselenium.test.DriverScript.OR;
 //import static com.qtpselenium.test.DriverScript.*;
@@ -11,10 +16,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+
+import com.qtpselenium.xls.read.Xls_Reader;
 public class Keywords {
 	
 	public WebDriver driver;
-	
+		
 	//WebDriver driver=null;
 	
 	public  String openBrowser(String object, String data){	
@@ -89,14 +96,27 @@ public class Keywords {
 		return Constants.KEYWORD_PASS;
 	}
 	
-	public  String verifyButtonText(){
+	public  String verifyButtonText(String object, String data){
 		APP_LOGS.debug("Verifying the button text");
 		
-		return Constants.KEYWORD_PASS;	
+		try{
+			String Actual=driver.findElement(By.xpath(OR.getProperty(object))).getText();
+			String Expected= driver.findElement(By.xpath(OR.getProperty(data))).getText();
+			if (Actual.equals(Expected))
+			return	Constants.KEYWORD_PASS;
+			else
+				return Constants.KEYWORD_FAIL+ "--- Not able to Verify Button Text";
+		}catch(Exception e){
+			return Constants.KEYWORD_FAIL+ "--- Not able to Verify Button Text";
+		}
+			
+		
 	}
 	
 	public  String selectList(){
 		APP_LOGS.debug("Selecting from list");
+		
+		
 		
 		return Constants.KEYWORD_PASS;	
 	}
@@ -136,10 +156,22 @@ public class Keywords {
 	}
 	
 	
-	public  String verifyText(){
+	public  String verifyText(String object, String data){
 		APP_LOGS.debug("Verifying the text");
+
+		try{
+			String Actual=driver.findElement(By.xpath(OR.getProperty(object))).getText();
+			String Expected= driver.findElement(By.xpath(OR.getProperty(data))).getText();
+			if (Actual.equals(Expected))
+			return	Constants.KEYWORD_PASS;
+			else
+				return Constants.KEYWORD_FAIL+ "--- Not able to Verify Button Text";
+		}catch(Exception e){
+			return Constants.KEYWORD_FAIL+ "--- Not able to Verify Button Text";
+		}
+			
 		
-		return Constants.KEYWORD_PASS;
+		//return Constants.KEYWORD_PASS;
 		
 	}
 	
@@ -230,8 +262,14 @@ public class Keywords {
 		return Constants.KEYWORD_PASS;
 	}
 	
-	public  String closeBrowser(){
+	public  String closeBrowser(String object, String data){
 		APP_LOGS.debug("Closing the browser");
+		try {
+			driver.quit();
+			
+		}catch(Exception e){
+			return Constants.KEYWORD_FAIL+ "Unable to close browser" + e.getMessage();
+		}
 		
 		return Constants.KEYWORD_PASS;
 
@@ -246,9 +284,42 @@ public class Keywords {
 		return Constants.KEYWORD_PASS;
 	}
 	
-	public String validateLogin(){
-        APP_LOGS.debug("Validating Login");
+	
+	public String validateLogin(String object, String data){
 		
+		//get object of current test xls and name of current test case
+        APP_LOGS.debug("Validating Login");
+        String Data_correctnes = CurrentTestSuiteXls.getCellData(CurrnetTestCaseName,"Data_correctnes", CurrentTestDataSetID);
+        while(driver.findElements(By.xpath(OR.getProperty("image_processing"))).size()!=0){
+        	try{
+        	String Visibility =	driver.findElement(By.xpath(OR.getProperty("image_processing"))).getAttribute("style");
+        		APP_LOGS.debug("System Processing request -- " + "Visibility is -- " + Visibility);
+        		
+        		if (Visibility.indexOf("hidden")!= -1){
+        			
+        			//error msg is present and processing image is not present
+        			String ActualErrMsg =driver.findElement(By.xpath(OR.getProperty("error_login"))).getText();
+        			//String ExpectedErrMsg= driver.findElement(By.xpath(OR.getProperty("error_login"))).getText();
+        			APP_LOGS.debug("Login failed ---- "+ActualErrMsg);
+        			
+        			if (Data_correctnes.equals("Y"))
+        				return Constants.KEYWORD_FAIL;
+        				else 
+        				return Constants.KEYWORD_PASS;
+        			
+        			
+        		}
+        	}catch(Exception e){
+        		
+        	}
+        	
+        	if (Data_correctnes.equals("N"))
+				return Constants.KEYWORD_FAIL;
+				else 
+				return Constants.KEYWORD_PASS;
+        }
+     
+       ///may be check title of the page or any other validaton    
 		return Constants.KEYWORD_PASS;
 	}
 	
