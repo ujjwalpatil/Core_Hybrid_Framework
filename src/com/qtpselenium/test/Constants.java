@@ -2,6 +2,7 @@ package com.qtpselenium.test;
 
 public class Constants {
 
+public static final Object RANDOM_VALUE = null;
 public static String TEST_SUIT_SHEET="Test Suite";
 public static String TEST_SUIT_ID="TSID";
 public static String TEST_SUIT_RUNMODE= "Runmode";
@@ -19,7 +20,7 @@ public static String KEYWORD_SKIP="SKIP";
 public static String KEYWORD_FAIL="FAIL";
 public static String CONFIG="config";
 public static String COL="col";
-public static String dataSeparator="//|";
+public static String dataSeparator="=";
 public static String OBJECT="Object";
 public static String Data="Data";
 

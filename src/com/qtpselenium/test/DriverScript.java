@@ -1,5 +1,8 @@
 package com.qtpselenium.test;
 
+import static com.qtpselenium.test.DriverScript.CONFIG;
+import static com.qtpselenium.test.DriverScript.OR;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -39,8 +42,8 @@ public class DriverScript {
 		
 		
 		//properties file initilization
-		public static Properties CONFIG=null;
-		public static Properties OR=null;
+		public static Properties CONFIG;
+		public static Properties OR;
 		
 		public DriverScript() throws IOException, NoSuchMethodException, RuntimeException 
 		{
@@ -51,13 +54,17 @@ public class DriverScript {
 			//capturescreenShot_method =Keywords.getClass().getMethod("captureScreenshot",String.class,String.class);
 			
 			//properties file initilization
-			FileInputStream fs = new FileInputStream(System.getProperty("user.dir")+"//src//com//qtpselenium//config//config.properties");
 			CONFIG= new Properties();
+			FileInputStream fs = new FileInputStream(System.getProperty("user.dir")+"//src//com//qtpselenium//config//config.properties");
+			//CONFIG= new Properties();
 			CONFIG.load(fs);
-			
-			fs = new FileInputStream(System.getProperty("user.dir")+"//src//com//qtpselenium//config//OR.poperties");
+		
 			OR= new Properties();
+			fs = new FileInputStream(System.getProperty("user.dir")+"//src//com//qtpselenium//config//OR.poperties");
+			//OR= new Properties();
 			OR.load(fs);
+			
+			//System.out.print(data + "data from OR is "+ CONFIG.getProperty("sign_in_button") +" OR prop for browser in keywords.java \n" );
 			
 		}
 		
@@ -146,59 +153,88 @@ public void ExecuteKeyWords() throws IllegalAccessException, IllegalArgumentExce
 	 for (CurrentTestStepID=2;CurrentTestStepID<=CurrentTestSuiteXls.getRowCount(Constants.TEST_STEPS_SHEET);CurrentTestStepID++ )
      {
 		
+		 data = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.Data ,CurrentTestStepID );
+		 
+		 String dataCol = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.Data, CurrentTestStepID);	
+			// config, OR, XLS
+		 //System.out.print(data + "before loop");
+		 
+     		if(dataCol.startsWith(Constants.CONFIG))
+     		{
+				// data has to be read from config.prop
+				String temp[] = dataCol.split(Constants.dataSeparator);
+				String key=temp[1];
+				//System.out.print(key + "key is ");
+				//data=CONFIG.getProperty(key);
+				data = key;
+				//System.out.print(data + "after loop");
+			}
+     		else if(dataCol.startsWith(Constants.COL))
+     		{
+     		// data has to be read from data col in test sheet
+				String temp[] = dataCol.split(Constants.dataSeparator);
+				String colName=temp[1];
+				//data= CurrentTestSuiteXls.getCellData(CurrnetTestCaseName, colName, CurrentTestDataSetID);
+				data = colName;
+			}
+     		else
+     		{
+     		// data has to be read from OR.prop
+				//data=OR.getProperty(dataCol);
+				//System.out.print(data);
+				
+				String data_string=dataCol;
+				data= data_string;
+				/*System.out.print(data + " data after loop from OR prop \n");
+				System.out.print("----- Excuting keyword ----" +  CurrentKeyword +"\n");  
+				String Expected=DriverScript.OR.getProperty(data);
+				System.out.print(Expected + " this is OR.getProperty(data) value \n"); */
+				
+			}
+     		
 		
+     		 object = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.OBJECT ,CurrentTestStepID );
+     		/*System.out.print("----- Excuting keyword ----" +  CurrentKeyword +"\n"); 
+     		System.out.print(object +"--- object after col loop from OR prop \n");
+     		System.out.print(data +"--- data after col loop from OR prop \n");*/
+     		 
 	  // Checking TCID if it has Runmode "Yes";
+     		 
+     		
+     		 
+     		
+     		
 	  if (CurrnetTestCaseName.equals(CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.TEST_CASE_ID,CurrentTestStepID)))
 	  {
-		  data = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.Data ,CurrentTestStepID );
-		  object = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.OBJECT ,CurrentTestStepID );
+		 
 		 CurrentKeyword=CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.TEST_STEPS_KEYWORD, CurrentTestStepID ); 
-	     APP_LOGS.debug(CurrentKeyword + "----- Excuting keyword" + CurrentKeyword );          				 
+	     APP_LOGS.debug(CurrentKeyword + "----- Excuting keyword " +  CurrentKeyword );    
+	    // System.out.print(CurrentKeyword);
+	    
 	     //Code to Execute the KEyword steps
 	     
 	     	     //System.out.println(method);
 	     
 	     
 	     // Reflection API
+	     object=CurrentTestSuiteXls.getCellData(CurrnetTestCaseName, Constants.OBJECT, CurrentTestStepID);
 	     for (int i=0;i<method.length;i++){
 	    	   	 if (method[i].getName().equalsIgnoreCase(CurrentKeyword)){
 	       		
-	       		 APP_LOGS.debug("Method is " + method[i]);
+	       		// APP_LOGS.debug("Method is " + method[i]);
 	       		 APP_LOGS.debug("Current Keyword is "+ CurrentKeyword);
 	       		
-	       		String dataCol = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.Data, CurrentTestStepID);	
-				// config, OR, XLS
-	       		if(dataCol.startsWith(Constants.CONFIG))
-	       		{
-					// data has to be read from config.prop
-					String temp[] = dataCol.split(Constants.dataSeparator);
-					String key=temp[1];
-					data=CONFIG.getProperty(key);
-				}
-	       		else if(dataCol.startsWith(Constants.COL))
-	       		{
-					String temp[] = dataCol.split(Constants.dataSeparator);
-					String colName=temp[1];
-					
-					data= CurrentTestSuiteXls.getCellData(CurrnetTestCaseName, colName, CurrentTestDataSetID);
-				}
-	       		else
-	       		{
-					data=OR.getProperty(dataCol);
-				}
-				
-				// OBJECT
-				object=CurrentTestSuiteXls.getCellData(CurrnetTestCaseName, Constants.OBJECT, CurrentTestStepID);
-				
-			    Keyword_Execution_Result=(String)method[i].invoke(Keywords,object,data); // pass on the object and data to all functions in Keywords.java
+	       		// OBJECT
+				Keyword_Execution_Result=(String)method[i].invoke(Keywords,object,data); // pass on the object and data to all functions in Keywords.java
 				APP_LOGS.debug(Keyword_Execution_Result);
 				ResultSet.add(Keyword_Execution_Result);
+				
 				// report the result
 	       		 
 				// capture screenshot
-				/*capturescreenShot_method.invoke(Keywords,
-						CurrentTestSuite+"_"+CurrnetTestCaseName+"_TS"+CurrentTestStepID+"_"+(CurrentTestDataSetID-1),
-						Keyword_Execution_Result);*/
+				//capturescreenShot_method.invoke
+				//(Keywords,CurrentTestSuite+"_"+CurrnetTestCaseName+"_TS"+CurrentTestStepID+"_"+(CurrentTestDataSetID-1),
+				//Keyword_Execution_Result);
                          
 	    	 }
 	     }

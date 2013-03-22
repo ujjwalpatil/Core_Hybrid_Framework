@@ -8,11 +8,15 @@ import static com.qtpselenium.test.DriverScript.CurrnetTestCaseName;
 import static com.qtpselenium.test.DriverScript.CurrentTestDataSetID;
 import static com.qtpselenium.test.DriverScript.CONFIG;
 import static com.qtpselenium.test.DriverScript.OR;
+
+import java.util.List;
+import java.util.Random;
 //import static com.qtpselenium.test.DriverScript.*;
 
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -27,10 +31,8 @@ public class Keywords {
 	public  String openBrowser(String object, String data){	
 		
 		APP_LOGS.debug("Opening browser");
-		APP_LOGS.debug(object);
-		APP_LOGS.debug(data);
-		System.out.print(object);
-		System.out.print(data);
+		//APP_LOGS.debug(object);
+		//APP_LOGS.debug(data);
 		
 		if (CONFIG.getProperty(data).equals("Mozilla"))
 			driver =new FirefoxDriver();
@@ -39,6 +41,13 @@ public class Keywords {
 			else if (CONFIG.getProperty(data).equals("Chrome"))
 			driver =new ChromeDriver();
 		
+		/*if (DriverScript.data.equals("Mozilla"))
+			driver =new FirefoxDriver();
+			else if (CONFIG.getProperty(data).equals("IE"))
+			driver =new InternetExplorerDriver();
+			else if (CONFIG.getProperty(data).equals("Chrome"))
+			driver =new ChromeDriver();
+		*/
 		return Constants.KEYWORD_PASS;
 	}
 	
@@ -113,9 +122,27 @@ public class Keywords {
 		
 	}
 	
-	public  String selectList(){
+	@SuppressWarnings("unchecked")
+	public  String selectList(String object, String data){
 		APP_LOGS.debug("Selecting from list");
 		
+		try{
+			
+			if (!data.equals(Constants.RANDOM_VALUE)){
+				driver.findElement(By.xpath(OR.getProperty(object))).sendKeys(data);
+			}else{
+				//logic to find random value in the list
+				WebElement droplist = driver.findElement(By.xpath(OR.getProperty(object)));
+				List<WebElement> droplist_contents = (List<WebElement>) droplist.findElement(By.xpath(OR.getProperty("option")));
+				Random num =new Random();
+				int index=num.nextInt(droplist_contents.size());
+				String SelectedVal =droplist_contents.get(index).getText();
+						
+				driver.findElement(By.xpath(OR.getProperty(object))).sendKeys(SelectedVal);
+			}
+			}catch (Exception e){
+				return Constants.KEYWORD_FAIL + "--- Could not select any element from lsit";
+			}
 		
 		
 		return Constants.KEYWORD_PASS;	
@@ -158,16 +185,36 @@ public class Keywords {
 	
 	public  String verifyText(String object, String data){
 		APP_LOGS.debug("Verifying the text");
+		/*System.out.print(OR.getProperty(object));
+		System.out.print(OR.getProperty(data));
+		
+		String Expected =driver.findElement(By.xpath(DriverScript.data)).getText();
+		String Actual= driver.findElement(By.xpath(DriverScript.object)).getText();
+		System.out.print(Expected + "Expected value");
+		System.out.print(Actual +"Actual value");*/
+		
+		/*try{
+			String Actual1=driver.findElement(By.xpath(DriverScript.object)).getText();
+			String Expected1= driver.findElement(By.xpath(DriverScript.data)).getText();
+			if (Actual1.equals(Expected1))
+			return	Constants.KEYWORD_PASS;
+			else
+				return Constants.KEYWORD_FAIL+ "--- Not able to Verify Button Text"+ "Actual value is" + Actual +"Expected value is " + Expected ;
+		}catch(Exception e){
+			return Constants.KEYWORD_FAIL+ "--- Exeption occured. Not able to Verify Button Text";
+		}
+		*/
 
 		try{
 			String Actual=driver.findElement(By.xpath(OR.getProperty(object))).getText();
-			String Expected= driver.findElement(By.xpath(OR.getProperty(data))).getText();
+			String Expected=DriverScript.OR.getProperty(data);
+			System.out.print(Expected + " this is OR.getProperty(data) value \n"); 
 			if (Actual.equals(Expected))
 			return	Constants.KEYWORD_PASS;
 			else
-				return Constants.KEYWORD_FAIL+ "--- Not able to Verify Button Text";
+				return Constants.KEYWORD_FAIL+ "--- Not able to Verify Button Text"+ "Actual value is" + Actual +"Expected value is " + Expected ;
 		}catch(Exception e){
-			return Constants.KEYWORD_FAIL+ "--- Not able to Verify Button Text";
+			return Constants.KEYWORD_FAIL+ "--- Exception occured. Not able to Verify Button Text";
 		}
 			
 		
