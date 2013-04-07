@@ -1,15 +1,71 @@
-19/03/2013 08:53:59 devpinoyLogger Hello
-19/03/2013 08:53:59 devpinoyLogger Config loaded, stating test
-19/03/2013 08:53:59 devpinoyLogger Check Items------N
-19/03/2013 08:53:59 devpinoyLogger Search Suite------N
-19/03/2013 08:53:59 devpinoyLogger C Suite------Y
-19/03/2013 08:53:59 devpinoyLogger *****Excuting Suite ***-----------C Suite
-19/03/2013 08:53:59 devpinoyLogger SampleTest--------Y
-19/03/2013 08:53:59 devpinoyLogger Excuting The Test Case SampleTest
-19/03/2013 08:53:59 devpinoyLogger Iteration number----1
-19/03/2013 08:53:59 devpinoyLogger openBrowser----- Excuting keywordopenBrowser
-19/03/2013 08:53:59 devpinoyLogger Method is public java.lang.String com.qtpselenium.test.Keywords.openBrowser(java.lang.String,java.lang.String)
-19/03/2013 08:53:59 devpinoyLogger Current Keyword is openBrowser
-19/03/2013 08:53:59 devpinoyLogger Opening browser
-19/03/2013 08:53:59 devpinoyLogger 
-19/03/2013 08:53:59 devpinoyLogger 
+05/04/2013 14:54:02 devpinoyLogger Hello
+05/04/2013 14:54:02 devpinoyLogger Config loaded, stating test
+05/04/2013 14:54:02 devpinoyLogger HOME------Y
+05/04/2013 14:54:02 devpinoyLogger *****Excuting Suite ***-----------HOME
+05/04/2013 14:54:02 devpinoyLogger CALL LOG SUMMARY--------Y
+05/04/2013 14:54:02 devpinoyLogger Excuting The Test Case CALL LOG SUMMARY
+05/04/2013 14:54:02 devpinoyLogger Iteration number----1
+05/04/2013 14:54:02 devpinoyLogger openBrowser----- Excuting keyword openBrowser
+05/04/2013 14:54:02 devpinoyLogger Current Keyword is openBrowser
+05/04/2013 14:54:02 devpinoyLogger Opening browser
+05/04/2013 14:54:05 devpinoyLogger PASS
+05/04/2013 14:54:05 devpinoyLogger navigate----- Excuting keyword navigate
+05/04/2013 14:54:05 devpinoyLogger Current Keyword is navigate
+05/04/2013 14:54:05 devpinoyLogger Navigating to URLhttp://63.209.0.118:8080/
+05/04/2013 14:54:08 devpinoyLogger PASS
+05/04/2013 14:54:09 devpinoyLogger verifyTextbyValue----- Excuting keyword verifyTextbyValue
+05/04/2013 14:54:09 devpinoyLogger Current Keyword is verifyTextbyValue
+05/04/2013 14:54:09 devpinoyLogger Verifying the text
+05/04/2013 14:54:09 devpinoyLogger PASS
+05/04/2013 14:54:09 devpinoyLogger writeInInput----- Excuting keyword writeInInput
+05/04/2013 14:54:09 devpinoyLogger Current Keyword is writeInInput
+05/04/2013 14:54:09 devpinoyLogger Writing in text box
+05/04/2013 14:54:09 devpinoyLogger PASS
+05/04/2013 14:54:09 devpinoyLogger writeInInput----- Excuting keyword writeInInput
+05/04/2013 14:54:09 devpinoyLogger Current Keyword is writeInInput
+05/04/2013 14:54:09 devpinoyLogger Writing in text box
+05/04/2013 14:54:09 devpinoyLogger PASS
+05/04/2013 14:54:10 devpinoyLogger click----- Excuting keyword click
+05/04/2013 14:54:10 devpinoyLogger Current Keyword is click
+05/04/2013 14:54:10 devpinoyLogger Clicking on any element
+05/04/2013 14:54:10 devpinoyLogger PASS
+05/04/2013 14:54:10 devpinoyLogger pause----- Excuting keyword pause
+05/04/2013 14:54:10 devpinoyLogger Current Keyword is pause
+05/04/2013 14:54:20 devpinoyLogger Paused for10secs
+05/04/2013 14:54:20 devpinoyLogger PASS
+05/04/2013 14:54:20 devpinoyLogger selectRadio----- Excuting keyword selectRadio
+05/04/2013 14:54:20 devpinoyLogger Current Keyword is selectRadio
+05/04/2013 14:54:20 devpinoyLogger Selecting a radio button
+05/04/2013 14:54:20 devpinoyLogger PASS
+05/04/2013 14:54:20 devpinoyLogger click----- Excuting keyword click
+05/04/2013 14:54:20 devpinoyLogger Current Keyword is click
+05/04/2013 14:54:20 devpinoyLogger Clicking on any element
+05/04/2013 14:54:20 devpinoyLogger PASS
+05/04/2013 14:54:21 devpinoyLogger pause----- Excuting keyword pause
+05/04/2013 14:54:21 devpinoyLogger Current Keyword is pause
+05/04/2013 14:54:31 devpinoyLogger Paused for10secs
+05/04/2013 14:54:31 devpinoyLogger PASS
+05/04/2013 14:54:31 devpinoyLogger verifyText----- Excuting keyword verifyText
+05/04/2013 14:54:31 devpinoyLogger Current Keyword is verifyText
+05/04/2013 14:54:31 devpinoyLogger Verifying the text
+05/04/2013 14:54:31 devpinoyLogger PASS
+05/04/2013 14:54:31 devpinoyLogger click----- Excuting keyword click
+05/04/2013 14:54:31 devpinoyLogger Current Keyword is click
+05/04/2013 14:54:31 devpinoyLogger Clicking on any element
+05/04/2013 14:54:31 devpinoyLogger PASS
+05/04/2013 14:54:31 devpinoyLogger click----- Excuting keyword click
+05/04/2013 14:54:31 devpinoyLogger Current Keyword is click
+05/04/2013 14:54:31 devpinoyLogger Clicking on any element
+05/04/2013 14:54:31 devpinoyLogger PASS
+05/04/2013 14:54:31 devpinoyLogger verifyText----- Excuting keyword verifyText
+05/04/2013 14:54:31 devpinoyLogger Current Keyword is verifyText
+05/04/2013 14:54:31 devpinoyLogger Verifying the text
+05/04/2013 14:54:31 devpinoyLogger PASS
+05/04/2013 14:54:32 devpinoyLogger click----- Excuting keyword click
+05/04/2013 14:54:32 devpinoyLogger Current Keyword is click
+05/04/2013 14:54:32 devpinoyLogger Clicking on any element
+05/04/2013 14:54:32 devpinoyLogger PASS
+05/04/2013 14:54:33 devpinoyLogger closeBrowser----- Excuting keyword closeBrowser
+05/04/2013 14:54:33 devpinoyLogger Current Keyword is closeBrowser
+05/04/2013 14:54:33 devpinoyLogger Closing the browser
+05/04/2013 14:54:33 devpinoyLogger PASS

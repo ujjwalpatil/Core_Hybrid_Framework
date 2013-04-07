@@ -1,11 +1,18 @@
-## Objects
-Login_link=
+## Login page Objects
 Forgot_passwd_link=//*[@id="id_loginForm:j_idt32"]/label
 sign_in_button=//*[@id="id_loginForm:loginButton"]
 sign_in_button_text=Sign In
 UserName_TextBox=//*[@id="id_loginForm:id_loginName"]
 Password_TextBox=//*[@id="id_loginForm:id_loginPanel"]/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/input
 homepage_8x_banner=//*[@id="dnn_ctr3002_HtmlModule_lblContent"]/img
+radio_button_bussiness=//*[@id='id_loginForm:j_idt42:0:j_idt44']/img
+login_button=//*[@id='id_loginForm:signIn']
+sign_out=//*[@id='id_form_welcome']/a[1]
+sign_out_text=Sign Out
+call_log_dropdown=//select[@id='id_form_home_callLogs:j_idt131']
+call_log_dropdown_thisweek=//option[@value='W']
+call_log_report_result=//*[@id='id_form_home_callLogs:id_callLog_body']/table/tbody/tr[2]/td[2]/span
+call_log_report_result_text=No incoming/outgoing calls for this timeframe.
 error_login=//*[@id="id_loginForm:j_idt12_body"]/table[3]/tbody/tr/td[2]/span
 error_login_wrong_user_pass=Incorrect username/password
 error_login_enterpassword=Please Enter Password

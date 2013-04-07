@@ -9,9 +9,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import com.qtpselenium.util.ReportUtil;
+import com.qtpselenium.util.TestUtil;
 import com.qtpselenium.test.Keywords;
 
 import org.apache.log4j.Logger;
+import org.testng.annotations.BeforeSuite;
 
 import com.qtpselenium.xls.read.Xls_Reader;
 
@@ -31,7 +35,7 @@ public class DriverScript {
 		public static String CurrnetTestCaseName;
 		public static int CurrentTestStepID;
 		public static String CurrentKeyword;
-		public static int CurrentTestDataSetID;
+		public static int CurrentTestDataSetID=2;
 		public static Method method[];
 		public static Keywords Keywords;
 		public static String Keyword_Execution_Result;
@@ -39,6 +43,10 @@ public class DriverScript {
 		public static String data;
 		public static String object;
 		public static Method capturescreenShot_method;
+		
+	
+		
+	
 		
 		
 		//properties file initilization
@@ -49,9 +57,8 @@ public class DriverScript {
 		{
 			
 			Keywords =new Keywords();
-			
 			method = Keywords.getClass().getMethods();
-			//capturescreenShot_method =Keywords.getClass().getMethod("captureScreenshot",String.class,String.class);
+			capturescreenShot_method =Keywords.getClass().getMethod("captureScreenshot",String.class,String.class);
 			
 			//properties file initilization
 			CONFIG= new Properties();
@@ -153,12 +160,31 @@ public void ExecuteKeyWords() throws IllegalAccessException, IllegalArgumentExce
 	 for (CurrentTestStepID=2;CurrentTestStepID<=CurrentTestSuiteXls.getRowCount(Constants.TEST_STEPS_SHEET);CurrentTestStepID++ )
      {
 		
-		 data = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.Data ,CurrentTestStepID );
 		 
+		 data = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.Data ,CurrentTestStepID );
 		 String dataCol = CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.Data, CurrentTestStepID);	
 			// config, OR, XLS
+ /*object means the object on site on which we are going to perform the task or action. 
+  * This may be it is as link, a button, a input box, radio button, etc.
+  * We need to get properties of that object and we save it to identify the object first 
+  * and then we can perform some actions on that object.we save properties of object in OR.properties. 
+  * We assing the key to the properties of object.
+  * We use the key(object name)from OR.properties and specify that key in testcase xl sheet's 'object' col. 
+  * Object col values can only be read from OR.prop.*/
+
+/*Data means, it can be retrive from either config, of xls sheet test col (in case of datasheet), 
+ * or OR.properties.so the idea is , data can be read from config, OR or xl sheet. 
+*but object always comes from config.So, data is something we provide to the action for and object on the web page. 
+*e.g.Data is used so that, we you can compare the values if you need to. 
+*also it helps to keep values of constants. It is specified in XL sheet in 'Data' col. 
+*we use the switch in the sheet to specify the source of data. 
+*e.g col=Username, which mean take the key of data from Testcase XL sheet col named Username. 
+*e.g.config=browserType, where browser type is key and its value is in config.properties. 
+*if there is no switch, key value is in OR.properties.*/
+
 		 //System.out.print(data + "before loop");
 		 
+		  
      		if(dataCol.startsWith(Constants.CONFIG))
      		{
 				// data has to be read from config.prop
@@ -174,8 +200,8 @@ public void ExecuteKeyWords() throws IllegalAccessException, IllegalArgumentExce
      		// data has to be read from data col in test sheet
 				String temp[] = dataCol.split(Constants.dataSeparator);
 				String colName=temp[1];
-				//data= CurrentTestSuiteXls.getCellData(CurrnetTestCaseName, colName, CurrentTestDataSetID);
-				data = colName;
+				data= CurrentTestSuiteXls.getCellData(CurrnetTestCaseName, colName, CurrentTestDataSetID);
+				//data = colName;
 			}
      		else
      		{
@@ -200,11 +226,7 @@ public void ExecuteKeyWords() throws IllegalAccessException, IllegalArgumentExce
      		 
 	  // Checking TCID if it has Runmode "Yes";
      		 
-     		
-     		 
-     		
-     		
-	  if (CurrnetTestCaseName.equals(CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.TEST_CASE_ID,CurrentTestStepID)))
+     if (CurrnetTestCaseName.equals(CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.TEST_CASE_ID,CurrentTestStepID)))
 	  {
 		 
 		 CurrentKeyword=CurrentTestSuiteXls.getCellData(Constants.TEST_STEPS_SHEET, Constants.TEST_STEPS_KEYWORD, CurrentTestStepID ); 
@@ -217,7 +239,7 @@ public void ExecuteKeyWords() throws IllegalAccessException, IllegalArgumentExce
 	     
 	     
 	     // Reflection API
-	     object=CurrentTestSuiteXls.getCellData(CurrnetTestCaseName, Constants.OBJECT, CurrentTestStepID);
+	  //   object=CurrentTestSuiteXls.getCellData(CurrnetTestCaseName, Constants.OBJECT, CurrentTestStepID);
 	     for (int i=0;i<method.length;i++){
 	    	   	 if (method[i].getName().equalsIgnoreCase(CurrentKeyword)){
 	       		
@@ -232,9 +254,9 @@ public void ExecuteKeyWords() throws IllegalAccessException, IllegalArgumentExce
 				// report the result
 	       		 
 				// capture screenshot
-				//capturescreenShot_method.invoke
-				//(Keywords,CurrentTestSuite+"_"+CurrnetTestCaseName+"_TS"+CurrentTestStepID+"_"+(CurrentTestDataSetID-1),
-				//Keyword_Execution_Result);
+				capturescreenShot_method.invoke
+				(Keywords,CurrentTestSuite+"_"+CurrnetTestCaseName+"_TS"+CurrentTestStepID+"_"+(CurrentTestDataSetID-1),
+				Keyword_Execution_Result);
                          
 	    	 }
 	     }
